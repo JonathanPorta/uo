@@ -1,0 +1,178 @@
+{	"attributes": {},
+	"entities": {
+		"User": {
+			"key": "user_id",
+			"properties": {
+				"user_id": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				}
+			},
+			"relationships": {
+				"ballots": {
+					"type": "has_many",
+					"property": "user_id",
+					"to": {
+						"type": "Ballot",
+						"property": "user_id"
+					},
+					"back": "user"
+				},
+				"cards": {
+					"type": "has_many",
+					"property": "user_id",
+					"to": {
+						"type": "Card",
+						"property": "user_id"
+					},
+					"back": "user"
+				}
+			}
+		},
+		"Card": {
+			"key": "card_id",
+			"properties": {
+				"card_id": {
+					"type": "string"
+				},
+				"user_id": {
+					"type": "string"
+				}
+			},
+			"relationships": {
+				"user": {
+					"type": "has_a",
+					"property": "user_id",
+					"to": {
+						"type": "User",
+						"property": "user_id"
+					},
+					"back": "cards"
+				}
+			}
+		},
+		"Ballot": {
+			"key": "ballot_id",
+			"properties": {
+				"ballot_id": {
+					"type": "string"
+				},
+				"user_id": {
+					"type": "string"
+				},
+				"event_id": {
+					"type": "string"
+				},
+				"question_id": {
+					"type": "string"
+				},
+				"answer": {
+					"type": "string"
+				}
+			},
+			"relationships": {
+				"user": {
+					"type": "has_a",
+					"property": "user_id",
+					"to": {
+						"type": "User",
+						"property": "user_id"
+					},
+					"back": "ballots"
+				},
+				"event": {
+					"type": "has_a",
+					"property": "event_id",
+					"to": {
+						"type": "Event",
+						"property": "event_id"
+					},
+					"back": "ballots"
+				},
+				"question": {
+					"type": "has_a",
+					"property": "question_id",
+					"to": {
+						"type": "Question",
+						"property": "question_id"
+					},
+					"back": "ballots"
+				}
+			}
+		},
+		"Event": {
+			"key": "event_id",
+			"properties": {
+				"event_id": {
+					"type": "string"
+				},
+				"location_id": {
+					"type": "string"
+				}
+			},
+			"relationships": {
+				"location": {
+					"type": "has_a",
+					"property": "location_id",
+					"to": {
+						"type": "Location",
+						"property": "location_id"
+					},
+					"back": "events"
+				},
+				"ballots": {
+					"type": "has_many",
+					"property": "event_id",
+					"to": {
+						"type": "Ballot",
+						"property": "event_id"
+					},
+					"back": "event"
+				}
+			}
+		},
+		"Location": {
+			"key": "location_id",
+			"properties": {
+				"location_id": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				}
+			},
+			"relationships": {
+				"events": {
+					"type": "has_many",
+					"property": "location_id",
+					"to": {
+						"type": "Event",
+						"property": "location_id"
+					},
+					"back": "location"
+				}
+			}
+		},
+		"Question": {
+			"key": "question_id",
+			"properties": {
+				"question_id": {
+					"type": "string"
+				}
+			},
+			"relationships": {
+				"ballots": {
+					"type": "has_many",
+					"property": "question_id",
+					"to": {
+						"type": "Ballot",
+						"property": "question_id"
+					},
+					"back": "question"
+				}
+			}
+		}
+	}
+}
