@@ -36,8 +36,9 @@
 	angular.module('uo', ["JEFRi", "jQuery", "ui"]).
 		config(['$routeProvider', function($routeProvider, $) {
 		$routeProvider.
-			when('/map', {template: jQuery.template("#gMap")}).
-			otherwise({redirectTo: '/map'});
+			when('/locations', {template: jQuery.template("#locations")}).
+			when('/locations/:locationId', {template: jQuery.template("#location")}).
+			otherwise({redirectTo: '/locations'});
 	}]);
 
 	angular.classes({
